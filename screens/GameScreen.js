@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert, Text } from "react-native";
+import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
 import { useEffect, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Title from "../components/ui/Title";
@@ -80,7 +80,11 @@ function GameScreen({ userNumber, onGameOver }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              <Ionicons name="remove-sharp" size={24} color={Colors.asccent400} />
+              <Ionicons
+                name="remove-sharp"
+                size={24}
+                color={Colors.asccent400}
+              />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
@@ -90,7 +94,12 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)}
+      {/* {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)} */}
+      <FlatList
+        data={guessRounds}
+        renderItem={(itemData) => <Text>{itemData.item}</Text>}
+        keyExtractor={(item) => item}
+      />
     </View>
   );
 }
